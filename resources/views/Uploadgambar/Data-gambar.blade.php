@@ -43,8 +43,8 @@
                     <div class="card card-info card-outline">
                         <div class="card-hearder">
                             <div class="card-tools mt-2 mr-3 text-right">
-                                <a href="{{route('create-pegawai')}}" class="btn btn-success">Tambah Data <i class="fas fa-plus-square"></i></a>
-                                <a href="{{route('cetak-pegawai')}}" target="blank" class="btn btn-primary">Cetak Pegawai<i class="fas fa-print"></i></a>
+                                <a href="{{route('create-gambar')}}" class="btn btn-success">Tambah Data <i class="fas fa-plus-square"></i></a>
+                                
                             </div>
                         </div>
                         <div class="card-body">
@@ -52,34 +52,37 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Nama</th>
-                                    <th>Jabatan</th>
-                                    <th>Alamat</th>
-                                    <th>Tanggal Lahir</th>
+                                    <th>Gambar</th>
                                     <th>Aksi</th>
+                                    
                                 </tr>
-                                @foreach ($dtPegawai as $item)
+                                @foreach ($datagambar as $item)
                                     
                                 
                                 <tr>
                                     <td>{{ $loop->iteration}}</td>
                                     <td>{{ $item->nama }}</td>
-                                    <td>{{ $item->jabatan->jabatan }}</td>
-                                    <td>{{ $item->alamat }}</td>
-                                    <td>{{date('d-m-Y', strtotime( $item->tanggal_lahir)) }}</td>
                                     <td>
-                                        <a href="{{url('edit-pegawai/'.$item->id)}}"><i class="far fa-edit"></i></a> | <a href="{{url('delete-pegawai/'.$item->id)}}" class="href"><i class="fas fa-trash-alt" style="color: red"></i></a>
+                                        <a href="{{ asset('img/'. $item->gambar)}}" target="_blank" rel="noopener noreferrer">Lihat Gambar</a>
+                                        {{-- <img src="{{ asset('img/'. $item->gambar)}}" height="3%" width="10%" alt="" srcset=""> --}}
                                     </td>
+                                    <td>
+                                        <a href="{{url('edit-gambar/'.$item->id)}}"><i class="far fa-edit"></i></a> 
+                                        | 
+                                        <a href="{{url('delete-gambar/'.$item->id)}}" class="href"><i class="fas fa-trash-alt" style="color: red"></i></a>
+                                    </td>
+                                    
                                 </tr>
                                 @endforeach
                             </table>
                             
                         </div>
                        
-                            <div class="card-footer">
+                            {{-- <div class="card-footer">
                          
                             {{ $dtPegawai->links() }}
                             
-                        </div>
+                        </div> --}}
                     </div>
                     
                 </div>

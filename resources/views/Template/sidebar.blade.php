@@ -65,14 +65,31 @@
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
-                                        <a href="{{route('data-pegawai')}}" class="nav-link active">
+                                        <a href="{{route('data-pegawai')}}" class="nav-link ">
                                             <i
                                                 class="far fa-circle nav-icon"
                                             ></i>
                                             <p>Data Pegawai</p>
                                         </a>
                                     </li>
-                                    
+                                    <li class="nav-item">
+                                        <a href="{{route('cetak-data-pegawai-form')}}" class="nav-link ">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Cetak Data Pegawai</p>
+                                        </a>
+                                    </li>
+                                     <li class="nav-item">
+                                        <a href="{{route('data-gambar')}}" class="nav-link ">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Data Gambar</p>
+                                        </a>
+                                    </li>
+                                     <li class="nav-item">
+                                        <a href="{{route('logout')}}" class="nav-link">
+                                            <i class="nav-icon fas fa-th"></i>
+                                            <p>Logout</p>
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                            

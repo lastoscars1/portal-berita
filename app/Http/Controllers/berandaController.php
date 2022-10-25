@@ -2,18 +2,22 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+
+
 
 class berandaController extends Controller
 {
-    /**
+    /** 
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return view('HalamanDepan.beranda');
+        return View('HalamanDepan.beranda');
     }
 
     /**
@@ -34,7 +38,7 @@ class berandaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       //
     }
 
     /**
@@ -56,7 +60,7 @@ class berandaController extends Controller
      */
     public function edit($id)
     {
-        //
+       //
     }
 
     /**

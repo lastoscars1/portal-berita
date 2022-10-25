@@ -11,15 +11,21 @@ use App\Http\Controllers\Controller;
 
 class PegawaiController extends Controller
 {
-    /**
+    /** 
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $dtPegawai = Pegawai::with('jabatan')->latest()->paginate(2);
+        $dtPegawai = Pegawai::with('jabatan')->latest()->paginate(5);
         return view('Pegawai.Data-Pegawai', compact('dtPegawai'));
+    }
+
+     public function cetakPegawai()
+    {
+        $dtCetakpegawai = Pegawai::with('jabatan')->get();
+        return view('Pegawai.Cetak-pegawai', compact('dtCetakpegawai'));
     }
 
     /**
@@ -100,5 +106,14 @@ class PegawaiController extends Controller
          $peg = Pegawai::findOrFail($id);
          $peg->delete();
          return back()->with('info', 'Data Berhasil Didelete!');
+    }
+    public function cetakForm(){
+        return view('Pegawai.Cetak-pegawaiForm');
+    }
+    public function cetakPegawaiPertanggal($tglawal, $tglakhir){
+        // dd(["Tanggal Awal: ".$tglawal, "Tanggal Akhir:".$tglakhir]);
+         $cetakPertanggal = Pegawai::with('Jabatan')->whereBetween('tanggal_lahir',[$tglawal, $tglakhir])->latest()->get();
+         return view('Pegawai.Cetak-pegawaiPertanggal', compact('cetakPertanggal'));
+
     }
 }
