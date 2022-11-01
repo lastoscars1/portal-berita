@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Jabatan;
 use App\Models\Pegawai;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 
@@ -36,7 +37,19 @@ class PegawaiController extends Controller
     public function create()
     {
         $jab = Jabatan::all();
-        return view('Pegawai.Create-Pegawai',compact('jab'));
+        $dtnipPegawai =Pegawai::all();
+        $pen = DB::table('pegawai')->select(DB::raw('MAX(RIGHT(nip,3)) as kode'));
+        $kd="";
+        if($pen->count()>0){
+            foreach ($pen->get() as $k) {
+                $tmp = ((int)$k->kode)+1;
+                $kd = sprintf("%03s", $tmp);
+            }
+        }
+        else{
+            $kd = "001";
+        }
+        return view('Pegawai.Create-Pegawai',compact('jab','kd'));
     }
 
     /**
@@ -49,6 +62,7 @@ class PegawaiController extends Controller
     {
         // dd($request->all());
         Pegawai::create([
+            'nip' => $request->nip,
             'nama' => $request->nama,
             'jabatan_id' => $request->jabatan_id,
             'alamat' => $request->alamat,
@@ -74,10 +88,10 @@ class PegawaiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($pegawai_id)
     {
         $jab = Jabatan::all();
-        $peg = Pegawai::with('jabatan')->findOrFail($id);
+        $peg = Pegawai::with('jabatan')->findOrFail($pegawai_id);
         return view('Pegawai.Edit-Pegawai', compact('peg','jab'));
     }
 
@@ -101,9 +115,9 @@ class PegawaiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($pegawai_id)
     {
-         $peg = Pegawai::findOrFail($id);
+         $peg = Pegawai::findOrFail($pegawai_id);
          $peg->delete();
          return back()->with('info', 'Data Berhasil Didelete!');
     }
@@ -116,4 +130,5 @@ class PegawaiController extends Controller
          return view('Pegawai.Cetak-pegawaiPertanggal', compact('cetakPertanggal'));
 
     }
+   
 }

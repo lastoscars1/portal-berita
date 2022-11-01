@@ -31,7 +31,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <a href="#">Home</a>
                                     </li>
                                     <li class="breadcrumb-item active">
-                                        Data Pegawai
+                                        Data Jabatan
                                     </li>
                                 </ol>
                             </div>
@@ -50,33 +50,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <h3>Create Data Pegawai</h3>
                         </div>
                         <div class="card-body">
-                            <form action="{{ route('simpan-pegawai') }}" method="post">
+                            <form action="{{ route('simpan-jabatan') }}" method="post">
                             {{ csrf_field() }}
                                 <div class="form-group">
-                                    <label>NIP</label>
-                                    <input type="text" id="nip" name="nip" value="{{'NIP-'.date('d-m-Y').'-'.$kd}}" class="form-control" readonly="" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Nama Pegawai</label>
-                                    <input type="text" id="nama" name="nama" class="form-control" placeholder="Nama Pegawai">
-                                </div>
-                                 <div class="form-group">
                                     <label>Jabatan</label>
-                                    <select name="jabatan_id" id="jabatan_id" class="form-control select2" style="100%">
-                                    <option disabled value>Pilih Jabatan</option>
-                                    @foreach ($jab as $item)
-                                    <option value="{{ $item->id }}">{{$item->jabatan}}</option>
-                                    @endforeach
-                                    </select>
+                                    <input type="text" id="jabatan" name="jabatan" class="form-control @error ('jabatan') is-invalid @enderror" placeholder="Nama Jabatan">
+                                    @error('jabatan')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
                                 </div>
-                                <div class="form-group">
-                                    <label>Alamat</label>
-                                    <textarea type="text" id="alamat" name="alamat" class="form-control" placeholder="Alamat"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label>Tanggal Lahir</label>
-                                    <input type="date" id="tanggal_lahir" name="tanggal_lahir" class="form-control">
-                                </div>
+                                 
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-success"> Simpan Data</button>
                                 </div>
